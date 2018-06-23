@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RadioGroup xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/rg_menu"
+    android:layout_width="120dp"
+    android:layout_height="match_parent"
+    android:layout_gravity="left"
+    android:background="#66000000"
+    android:gravity="center"
+    android:orientation="vertical">
+
+
+    <RadioButton
+        android:id="@+id/rb_all"
+        style="@style/Style_Menu_RadioButton"
+        android:checked="true"
+        android:text="全部" />
+
+    <TextView style="@style/Style_Divider" />
+
+    <RadioButton
+        android:id="@+id/rb_belle"
+        style="@style/Style_Menu_RadioButton"
+        android:text="美女" />
+
+    <TextView style="@style/Style_Divider" />
+
+    <RadioButton
+        android:id="@+id/rb_scenery"
+        style="@style/Style_Menu_RadioButton"
+        android:text="风景" />
+
+    <TextView style="@style/Style_Divider" />
+
+    <RadioButton
+        android:id="@+id/rb_cartoon"
+        style="@style/Style_Menu_RadioButton"
+        android:text="动漫" />
+
+    <TextView style="@style/Style_Divider" />
+
+    <RadioButton
+        android:id="@+id/rb_creativity"
+        style="@style/Style_Menu_RadioButton"
+        android:text="创意" />
+
+    <TextView style="@style/Style_Divider" />
+
+    <RadioButton
+        android:id="@+id/rb_automobile"
+        style="@style/Style_Menu_RadioButton"
+        android:text="汽车" />
+
+    <TextView style="@style/Style_Divider" />
+
+    <RadioButton
+        android:id="@+id/rb_game"
+        style="@style/Style_Menu_RadioButton"
+        android:text="游戏" />
+
+    <TextView style="@style/Style_Divider" />
+
+    <RadioButton
+        android:id="@+id/rb_films"
+        style="@style/Style_Menu_RadioButton"
+        android:text="影视" />
+
+
+</RadioGroup>

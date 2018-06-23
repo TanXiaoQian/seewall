@@ -1,0 +1,18 @@
+<resources>
+    <string name="app_name">看见壁纸</string>
+
+
+    <string name="reload_data">重新加载</string>
+    <string name="net_error">网络错误</string>
+
+    <string name="all">全部</string>
+    <string name="scenery">风景</string>
+    <string name="belle">美女</string>
+    <string name="cartoon">动漫</string>
+    <string name="creativity">创意</string>
+    <string name="automobile">汽车</string>
+    <string name="game">游戏</string>
+    <string name="films">影视</string>
+    <string name="sports">体育</string>
+
+</resources>

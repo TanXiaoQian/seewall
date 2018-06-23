@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string-array name="category">
+
+        <item>全部</item>
+        <item>风景</item>
+        <item>动漫</item>
+        <item>搞笑</item>
+        <item>创意</item>
+        <item>汽车</item>
+        <item>游戏</item>
+        <item>影视</item>
+        <item>体育</item>
+
+    </string-array>
+
+</resources>
