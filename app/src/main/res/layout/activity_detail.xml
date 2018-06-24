@@ -1,14 +1,99 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="wallpaper"
+            type="com.seesong.seewall.model.Wallpaper" />
+    </data>
 
 
-    <ImageView
-        android:id="@+id/image_wall"
+    <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:transitionName="transitionImg" />
+        android:layout_height="match_parent">
 
 
-</FrameLayout>
+        <ImageView
+            android:id="@+id/image_wall"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:scaleType="centerCrop"
+            android:transitionName="transitionImg" />
+
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+
+            <android.support.v7.widget.AppCompatImageView
+                android:id="@+id/back"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentTop="true"
+                android:layout_marginLeft="@dimen/activity_horizontal_margin"
+                android:layout_marginTop="@dimen/activity_horizontal_margin"
+                app:srcCompat="@drawable/svg_back" />
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/item_category_high"
+                android:layout_alignParentBottom="true"
+                android:background="@drawable/shape_gradient_trans_black_angle_180"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:paddingLeft="@dimen/activity_horizontal_margin"
+                android:paddingRight="@dimen/activity_horizontal_margin">
+
+
+                <android.support.v7.widget.AppCompatTextView
+                    android:id="@+id/user"
+                    style="@style/Style_Wrap.Text"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:textColor="@android:color/white" />
+
+
+                <android.support.v7.widget.AppCompatTextView
+                    android:id="@+id/praise"
+                    style="@style/Style_Wrap.Text"
+                    android:drawableLeft="@drawable/svg_praise"
+                    android:drawablePadding="2dp"
+                    android:gravity="center"
+                    android:padding="4dp"
+                    android:textColor="@android:color/white" />
+
+                <android.support.v7.widget.AppCompatTextView
+                    android:id="@+id/collect"
+                    style="@style/Style_Wrap.Text"
+                    android:drawableLeft="@drawable/svg_collect_1"
+                    android:drawablePadding="2dp"
+                    android:gravity="center"
+                    android:padding="4dp"
+                    android:textColor="@android:color/white" />
+
+                <android.support.v7.widget.AppCompatTextView
+                    android:id="@+id/comment"
+                    style="@style/Style_Wrap.Text"
+                    android:drawableLeft="@drawable/svg_comment_2"
+                    android:drawablePadding="2dp"
+                    android:gravity="center"
+                    android:padding="4dp"
+                    android:textColor="@android:color/white" />
+
+
+            </LinearLayout>
+
+
+        </RelativeLayout>
+
+        <include layout="@layout/layout_loading" />
+
+    </FrameLayout>
+
+</layout>

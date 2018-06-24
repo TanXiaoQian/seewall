@@ -5,4 +5,10 @@
     <color name="colorAccent">#FF4081</color>
 
     <color name="gray_aa">#aaaaaa</color>
+
+
+    <color name="popup_bg">#8f000000</color>
+    <color name="color_black_11">#11000000</color>
+    <color name="color_black_80">#33000000</color>
+    <color name="color_black_a0">#80000000</color>
 </resources>

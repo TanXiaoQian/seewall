@@ -2,6 +2,7 @@ package com.seesong.seewall.module;
 
 import android.content.Context;
 import android.text.TextUtils;
+import android.util.Log;
 
 import com.seesong.seewall.model.Wallpaper;
 import com.seesong.seewall.module.param.WallRequestParam;
@@ -77,9 +78,6 @@ public class WallPagerModule {
 
                     Elements flex_grid = document.getElementsByClass("flex_grid");
                     String src;
-                    String icon_like;
-                    String favorite;
-                    String comment;
                     if (!flex_grid.isEmpty()) {
 
                         List<Wallpaper> wallpapers = new ArrayList<>();
@@ -98,14 +96,15 @@ public class WallPagerModule {
                                     wallpaper = new Wallpaper();
                                     wallpaper.setSrc(src);
                                     Elements ems = element.getElementsByTag("em");
+                                    Elements as = element.getElementsByTag("a");
 
                                     if (ems.size() >= 3) {
-                                        icon_like = ems.get(0).text();
-                                        favorite = ems.get(1).text();
-                                        comment = ems.get(2).text();
-                                        wallpaper.setLickCount(icon_like);
-                                        wallpaper.setFavoriteCount(favorite);
-                                        wallpaper.setCommentCount(comment);
+                                        wallpaper.setLickCount(ems.get(0).text());
+                                        wallpaper.setFavoriteCount(ems.get(1).text());
+                                        wallpaper.setCommentCount(ems.get(2).text());
+                                    }
+                                    if (as.size() > 1) {
+                                        wallpaper.setUser(as.get(1).text());
                                     }
                                     wallpapers.add(wallpaper);
                                 }

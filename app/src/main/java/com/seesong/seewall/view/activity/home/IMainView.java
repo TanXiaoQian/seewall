@@ -11,10 +11,6 @@ import java.util.List;
 
 public interface IMainView extends IBaseView{
 
-    void dismissLoading();
-
-    void showLoading();
-
     void onSuccess(List<Wallpaper> wallpapers);
 
     void onLoadMore(List<Wallpaper> wallpapers);

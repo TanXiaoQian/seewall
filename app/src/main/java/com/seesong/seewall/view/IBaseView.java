@@ -6,4 +6,8 @@ package com.seesong.seewall.view;
 
 public interface IBaseView {
 
+    void dismissLoading();
+
+    void showLoading();
+
 }
