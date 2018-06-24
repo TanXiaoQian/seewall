@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools">
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
+
         <variable
             name="wallpaper"
             type="com.seesong.seewall.model.Wallpaper" />
@@ -51,7 +51,6 @@
 
 
                 <android.support.v7.widget.AppCompatTextView
-                    android:id="@+id/user"
                     style="@style/Style_Wrap.Text"
                     android:layout_width="0dp"
                     android:layout_weight="1"
@@ -60,7 +59,6 @@
 
 
                 <android.support.v7.widget.AppCompatTextView
-                    android:id="@+id/praise"
                     style="@style/Style_Wrap.Text"
                     android:drawableLeft="@drawable/svg_praise"
                     android:drawablePadding="2dp"
@@ -70,7 +68,6 @@
                     android:textColor="@android:color/white" />
 
                 <android.support.v7.widget.AppCompatTextView
-                    android:id="@+id/collect"
                     style="@style/Style_Wrap.Text"
                     android:drawableLeft="@drawable/svg_collect_1"
                     android:drawablePadding="2dp"
@@ -80,7 +77,6 @@
                     android:textColor="@android:color/white" />
 
                 <android.support.v7.widget.AppCompatTextView
-                    android:id="@+id/comment"
                     style="@style/Style_Wrap.Text"
                     android:drawableLeft="@drawable/svg_comment_2"
                     android:drawablePadding="2dp"
