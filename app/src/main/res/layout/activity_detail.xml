@@ -4,7 +4,6 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
-
         <variable
             name="wallpaper"
             type="com.seesong.seewall.model.Wallpaper" />
@@ -56,6 +55,7 @@
                     style="@style/Style_Wrap.Text"
                     android:layout_width="0dp"
                     android:layout_weight="1"
+                    android:text="@{wallpaper.user}"
                     android:textColor="@android:color/white" />
 
 
@@ -66,6 +66,7 @@
                     android:drawablePadding="2dp"
                     android:gravity="center"
                     android:padding="4dp"
+                    android:text="@{wallpaper.lickCount}"
                     android:textColor="@android:color/white" />
 
                 <android.support.v7.widget.AppCompatTextView
@@ -75,6 +76,7 @@
                     android:drawablePadding="2dp"
                     android:gravity="center"
                     android:padding="4dp"
+                    android:text="@{wallpaper.favoriteCount}"
                     android:textColor="@android:color/white" />
 
                 <android.support.v7.widget.AppCompatTextView
@@ -84,6 +86,7 @@
                     android:drawablePadding="2dp"
                     android:gravity="center"
                     android:padding="4dp"
+                    android:text="@{wallpaper.commentCount}"
                     android:textColor="@android:color/white" />
 
 

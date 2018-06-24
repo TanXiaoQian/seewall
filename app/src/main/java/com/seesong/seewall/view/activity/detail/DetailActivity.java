@@ -2,15 +2,21 @@ package com.seesong.seewall.view.activity.detail;
 
 import android.animation.AnimatorListenerAdapter;
 import android.animation.ValueAnimator;
+import android.app.WallpaperManager;
+import android.content.Context;
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.AppCompatImageView;
 import android.support.v7.widget.AppCompatTextView;
+import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 import android.view.animation.DecelerateInterpolator;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import com.airbnb.lottie.LottieAnimationView;
 import com.bumptech.glide.Glide;
@@ -24,8 +30,9 @@ import com.seesong.seewall.view.activity.BaseActivity;
 import com.seesong.seewall.view.anim.easytrans.EasyTransition;
 import com.seesong.seewall.view.anim.easytrans.EasyTransitionOptions;
 
+import java.io.IOException;
+
 import butterknife.BindView;
-import butterknife.ButterKnife;
 import butterknife.OnClick;
 import razerdp.basepopup.BasePopupWindow;
 import razerdp.blur.PopupBlurOption;
@@ -71,10 +78,14 @@ public class DetailActivity extends BaseActivity<DetailPresenter> implements IDe
         public void onClick(View v) {
             switch (v.getId()) {
                 case R.id.image_share:
-
+//                    mPresenter.share(mWallpaper.getSrc());
+                    if (mWallpaper != null && !TextUtils.isEmpty(mWallpaper.getSrc()))
+                        onShare(mWallpaper.getSrc());
                     break;
                 case R.id.image_photo:
-
+                    imageDetail.setDrawingCacheEnabled(true);
+                    Bitmap bitmap = imageDetail.getDrawingCache();
+                    setWall(bitmap);
                     break;
                 case R.id.image_download:
                     mPresenter.download(mWallpaper.getSrc());
@@ -139,6 +150,11 @@ public class DetailActivity extends BaseActivity<DetailPresenter> implements IDe
 
 
     @Override
+    public void onDetachedFromWindow() {
+        super.onDetachedFromWindow();
+    }
+
+    @Override
     public void onBackPressed() {
         EasyTransition.exit(DetailActivity.this, 500, new DecelerateInterpolator());
     }
@@ -153,6 +169,11 @@ public class DetailActivity extends BaseActivity<DetailPresenter> implements IDe
     public void dismissLoading() {
         lottieLoading.cancelAnimation();
         lottieLoading.setVisibility(View.GONE);
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
     }
 
     private void showPop() {
@@ -184,5 +205,52 @@ public class DetailActivity extends BaseActivity<DetailPresenter> implements IDe
             default:
                 break;
         }
+    }
+
+
+    @Override
+    public void onSetWallpaper(Bitmap bitmap) {
+        try {
+            WallpaperManager wpm = (WallpaperManager) getSystemService(
+                    Context.WALLPAPER_SERVICE);
+
+            if (wpm != null) {
+                wpm.setBitmap(bitmap);
+                Toast.makeText(DetailActivity.this, "设置成功", Toast.LENGTH_SHORT).show();
+            }
+        } catch (IOException e) {
+            Log.e("TAG", "Failed to set wallpaper: " + e);
+        }
+    }
+
+    private void setWall(Bitmap bitmap) {
+        try {
+            WallpaperManager wpm = (WallpaperManager) getSystemService(
+                    Context.WALLPAPER_SERVICE);
+
+            if (wpm != null) {
+                wpm.setBitmap(bitmap);
+                Toast.makeText(DetailActivity.this, "设置成功", Toast.LENGTH_SHORT).show();
+            }
+        } catch (IOException e) {
+            Log.e("TAG", "Failed to set wallpaper: " + e);
+        }
+    }
+
+    @Override
+    public void onShare(String url) {
+        Intent shareIntent = new Intent(Intent.ACTION_SEND);
+        shareIntent.setType("text/plain");
+        shareIntent.putExtra(Intent.EXTRA_TEXT, "这张图片猴厉害" + url);
+        //自定义选择框的标题
+        //startActivity(Intent.createChooser(shareIntent, "邀请好友"));
+        //系统默认标题
+        startActivity(shareIntent);
+
+    }
+
+    @Override
+    public void onDownload() {
+
     }
 }

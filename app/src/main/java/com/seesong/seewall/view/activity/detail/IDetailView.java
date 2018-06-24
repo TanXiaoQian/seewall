@@ -1,5 +1,7 @@
 package com.seesong.seewall.view.activity.detail;
 
+import android.graphics.Bitmap;
+
 import com.seesong.seewall.view.IBaseView;
 
 /**
@@ -8,5 +10,10 @@ import com.seesong.seewall.view.IBaseView;
 
 public interface IDetailView extends IBaseView {
 
+    void onSetWallpaper(Bitmap bitmap);
+
+    void onShare(String url);
+
+    void onDownload();
 
 }

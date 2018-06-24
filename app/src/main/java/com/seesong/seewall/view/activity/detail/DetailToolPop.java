@@ -1,6 +1,7 @@
 package com.seesong.seewall.view.activity.detail;
 
 import android.content.Context;
+import android.support.v7.widget.AppCompatImageView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.animation.Animation;
@@ -17,15 +18,20 @@ public class DetailToolPop extends BasePopupWindow {
 
 
     private View popupView;
-    private View.OnClickListener mOnClickListener;
 
     public void setOnClickListener(View.OnClickListener onClickListener) {
-        this.mOnClickListener = onClickListener;
+        imageShare.setOnClickListener(onClickListener);
+        imagePhoto.setOnClickListener(onClickListener);
+        imageDownload.setOnClickListener(onClickListener);
     }
+
+    private AppCompatImageView imageShare;
+    private AppCompatImageView imagePhoto;
+    private AppCompatImageView imageDownload;
 
     public DetailToolPop(Context context) {
         super(context);
-        bindEvent();
+        initView();
     }
 
     @Override
@@ -54,11 +60,11 @@ public class DetailToolPop extends BasePopupWindow {
         return popupView.findViewById(R.id.tool_containers);
     }
 
-    private void bindEvent() {
+    private void initView() {
         if (popupView != null) {
-            popupView.findViewById(R.id.image_share).setOnClickListener(mOnClickListener);
-            popupView.findViewById(R.id.image_photo).setOnClickListener(mOnClickListener);
-            popupView.findViewById(R.id.image_download).setOnClickListener(mOnClickListener);
+            imageShare = popupView.findViewById(R.id.image_share);
+            imagePhoto = popupView.findViewById(R.id.image_photo);
+            imageDownload = popupView.findViewById(R.id.image_download);
         }
 
     }
