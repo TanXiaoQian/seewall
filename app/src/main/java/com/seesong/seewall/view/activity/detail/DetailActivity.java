@@ -12,7 +12,6 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.AppCompatImageView;
-import android.support.v7.widget.AppCompatTextView;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
@@ -21,6 +20,7 @@ import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.airbnb.lottie.LottieAnimationView;
+import com.android.debug.hv.ViewServer;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.resource.drawable.GlideDrawable;
 import com.bumptech.glide.request.animation.GlideAnimation;
@@ -90,15 +90,23 @@ public class DetailActivity extends AppCompatActivity implements IDetailView {
         }
     };
 
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         ActivityDetailBinding binding = DataBindingUtil.setContentView(this, R.layout.activity_detail);
         ButterKnife.bind(this);
+        ViewServer.get(this).addWindow(this);
         mWallpaper = getIntent().getParcelableExtra(DATA);
         binding.setWallpaper(mWallpaper);
         RxPermissions rxPermissions = new RxPermissions(this); // where this is an Activity instance
         initView();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        ViewServer.get(this).removeWindow(this);
     }
 
 
@@ -159,6 +167,7 @@ public class DetailActivity extends AppCompatActivity implements IDetailView {
     @Override
     protected void onDestroy() {
         super.onDestroy();
+        ViewServer.get(this).setFocusedWindow(this);
     }
 
     private void showPop() {
@@ -219,6 +228,7 @@ public class DetailActivity extends AppCompatActivity implements IDetailView {
         startActivity(shareIntent);
 
     }
+
 
     @Override
     public void onSave(String url) {

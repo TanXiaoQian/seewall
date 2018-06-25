@@ -9,6 +9,8 @@ import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 
+import com.seesong.seewall.App;
+
 /**
  * Created by tanxiaoqian on 2018/6/24.
  */
@@ -47,7 +49,6 @@ public class ActivityHelper implements Application.ActivityLifecycleCallbacks {
 
     @Override
     public void onActivityDestroyed(Activity activity) {
-
     }
 
 

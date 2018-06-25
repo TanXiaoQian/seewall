@@ -5,6 +5,7 @@ import android.support.annotation.LayoutRes;
 import android.support.annotation.Nullable;
 
 import com.pgyersdk.crash.PgyCrashManager;
+import com.seesong.seewall.App;
 import com.seesong.seewall.presenter.BasePresenter;
 import com.trello.rxlifecycle2.components.support.RxAppCompatActivity;
 
@@ -53,6 +54,7 @@ public abstract class BaseActivity<P extends BasePresenter> extends RxAppCompatA
     @Override
     protected void onDestroy() {
         super.onDestroy();
+        App.getAppRefWatcher(this).watch(this);
         PgyCrashManager.unregister();
         if (mUnbinder != null)
             mUnbinder.unbind();

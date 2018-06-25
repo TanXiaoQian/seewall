@@ -80,7 +80,10 @@ dependencies {
     compile 'com.github.CymChad:BaseRecyclerViewAdapterHelper:2.9.30'
 
     compile 'com.github.razerdp:BasePopup:1.9.4'
+    compile 'com.github.romainguy:ViewServer:017c01cd512cac3ec054d9eee05fc48c5a9d2de'
 
+    debugImplementation 'com.squareup.leakcanary:leakcanary-android:1.5.4'
+    releaseImplementation 'com.squareup.leakcanary:leakcanary-android-no-op:1.5.4'
     implementation 'com.airbnb.android:lottie:2.5.5'
     compile('com.github.ihsanbal:LoggingInterceptor:2.0.0') {
         exclude group: 'org.json', module: 'json'

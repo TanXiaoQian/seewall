@@ -19,5 +19,4 @@ public class BasePresenter<GV extends IBaseView> {
     }
 
 
-
 }

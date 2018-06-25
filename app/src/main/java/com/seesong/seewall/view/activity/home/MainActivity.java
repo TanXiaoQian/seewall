@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.Typeface;
 import android.os.Bundle;
+import android.os.Debug;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.view.GravityCompat;
@@ -20,6 +21,7 @@ import android.widget.RadioButton;
 import android.widget.RadioGroup;
 
 import com.airbnb.lottie.LottieAnimationView;
+import com.android.debug.hv.ViewServer;
 import com.bumptech.glide.Glide;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.seesong.seewall.R;
@@ -44,7 +46,7 @@ import butterknife.BindView;
  * Created by tanxiaoqian on 2018/6/18.
  */
 
-public class MainActivity extends BaseActivity<HomePresenter> implements IMainView {
+public class MainActivity extends BaseActivity<HomePresenter> implements IMainView, ViewStub.OnInflateListener {
 
     public static void startActivity(AppCompatActivity activity) {
         Intent intent = new Intent(activity, MainActivity.class);
@@ -101,6 +103,8 @@ public class MainActivity extends BaseActivity<HomePresenter> implements IMainVi
 
     private Map<Integer, String> mCateMap;
     private int mCurrentCate;
+
+    private volatile boolean mIsInflate = false;
 
 
     private DiscreteScrollView.ScrollStateChangeListener mScrollStateChangeListener = new DiscreteScrollView.ScrollStateChangeListener() {
@@ -196,10 +200,12 @@ public class MainActivity extends BaseActivity<HomePresenter> implements IMainVi
 
     @Override
     protected void initView() {
+        Debug.startMethodTracing("hello_word");
+        ViewServer.get(this).addWindow(this);
         drawerLayout.setScrimColor(Color.TRANSPARENT);
         initCategory();
         initWallScrollView();
-        mBlurTransformation = new BlurTransformation(this, 10);
+        mBlurTransformation = new BlurTransformation(getApplicationContext(), 10);
         rgMenu.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(RadioGroup group, int checkedId) {
@@ -210,9 +216,30 @@ public class MainActivity extends BaseActivity<HomePresenter> implements IMainVi
                 mCurrentCate = checkedId;
             }
         });
+        vsHomeContent.setOnInflateListener(this);
 
     }
 
+    @Override
+    protected void onStart() {
+        super.onStart();
+
+        Debug.stopMethodTracing();
+
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        ViewServer.get(this).setFocusedWindow(this);
+    }
+
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        ViewServer.get(this).removeWindow(this);
+    }
 
     @Override
     protected void initPresenter() {
@@ -268,16 +295,24 @@ public class MainActivity extends BaseActivity<HomePresenter> implements IMainVi
     }
 
     private void inflate() {
-        vsHomeContent.inflate();
-        mErrorContainers = findViewById(R.id.error_containers);
-        mLottieNetError = findViewById(R.id.lottie_net_error);
-        mStatusReloadButton = findViewById(R.id.status_reload_button);
-        mStatusReloadButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                mPresenter.loadData();
+        if (!mIsInflate) {
+            vsHomeContent.inflate();
+            mErrorContainers = findViewById(R.id.error_containers);
+            mLottieNetError = findViewById(R.id.lottie_net_error);
+            mStatusReloadButton = findViewById(R.id.status_reload_button);
+            mStatusReloadButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    mPresenter.loadData();
+                    mErrorContainers.setVisibility(View.GONE);
+                }
+            });
+        } else {
+            if (mErrorContainers != null) {
+                mErrorContainers.setVisibility(View.VISIBLE);
             }
-        });
+        }
+
     }
 
     @Override
@@ -341,4 +376,8 @@ public class MainActivity extends BaseActivity<HomePresenter> implements IMainVi
     }
 
 
+    @Override
+    public void onInflate(ViewStub stub, View inflated) {
+        mIsInflate = true;
+    }
 }
